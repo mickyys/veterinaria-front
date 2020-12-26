@@ -19,14 +19,24 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "aot": true,
+            "allowedCommonJsDependencies": [
+              "chartist"
+            ],
             "assets": [
               "src/favicon.ico",
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "src/styles.css",
+              "src/assets/css/demo.css",
+              "src/assets/scss/material-dashboard.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -87,9 +97,16 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "src/styles.css",
+              "src/assets/css/demo.css",
+              "src/assets/scss/material-dashboard.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/jasny-bootstrap/dist/js/jasny-bootstrap.min.js"
+            ]
           }
         },
         "lint": {

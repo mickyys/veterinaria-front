@@ -1,0 +1,464 @@
+<div class="wrapper">
+  <div
+    class="page-header register-page header-filter"
+    filter-color="black"
+    style="
+      background-image: url('./assets/img/pets/pets-3715733_1920.jpg');
+      background-size: cover;
+      background-position: 25% 100%;
+    "
+  >
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 ml-auto mr-auto">
+          <div class="card card-signup">
+            <h2 class="card-title text-center">Registrar</h2>
+            <div class="card-body">
+              <div *ngIf="step === steps.step_one" class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal">
+                    <div class="icon icon-rose">
+                      <i class="material-icons">pets</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Pacientes</h4>
+                      <p class="description">
+                        Podras registrar todas las visitias de tus pacientes y
+                        visualizarlas desde donde quieras
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-primary">
+                      <i class="material-icons">calendar_today</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Agendar Visita</h4>
+                      <p class="description">
+                        Podras agendar horas en tu clinica para la visita de
+                        pacientes, los tutores de tus pacientes podran confirmar
+                        o rechazar la hora agendada desde su telefono.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-info">
+                      <i class="material-icons">group</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Usuarios</h4>
+                      <p class="description">
+                        Podras crear perfiles de usuarios para todo tu equipo
+                        administrativos y doctores.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+                  <form
+                    class="form"
+                    [formGroup]="formGroupStepOne"
+                    (ngSubmit)="onSubmitStepOne()"
+                  >
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">domain</i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Nombre veterinaria"
+                          formControlName="name"
+                        />
+                      </div>
+                      <mat-error
+                        class="ml-5 pl-2"
+                        *ngIf="
+                          isFormGroupStepOneTouchOrDirty('name') &&
+                          formGroupStepOne.get('name').hasError('required')
+                        "
+                      >
+                        Nombre veterinaria es requerido
+                      </mat-error>
+                    </div>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">mail</i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Correo (Administrador)"
+                          formControlName="email"
+                        />
+                      </div>
+                      <mat-error
+                        class="ml-5 pl-2"
+                        *ngIf="
+                          isFormGroupStepOneTouchOrDirty('email') &&
+                          formGroupStepOne.get('email').hasError('required')
+                        "
+                      >
+                        Email es requerido
+                      </mat-error>
+                      <mat-error
+                        class="ml-5 pl-2"
+                        *ngIf="
+                          isFormGroupStepOneTouchOrDirty('email') &&
+                          formGroupStepOne.get('email').hasError('email')
+                        "
+                      >
+                        Formato no válido
+                      </mat-error>
+                    </div>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">lock</i>
+                          </span>
+                        </div>
+                        <input
+                          [type]="fieldTextType ? 'text' : 'password'"
+                          class="form-control"
+                          placeholder="Contraseña (Administrador)"
+                          formControlName="password"
+                        />
+                        <div class="input-group-append">
+                          <span
+                            class="input-group-text"
+                            (click)="toggleFieldTextType()"
+                          >
+                            <i class="fa fa-eye-slash"></i>
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    <mat-error
+                      class="ml-5 pl-3"
+                      *ngIf="
+                        isFormGroupStepOneTouchOrDirty('password') &&
+                        formGroupStepOne.get('password').hasError('required')
+                      "
+                    >
+                      Contraseña es requerida
+                    </mat-error>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">phone</i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          placeholder="Telefono (+56912345678)"
+                          formControlName="phone"
+                        />
+                      </div>
+                    </div>
+                    <mat-error
+                      class="ml-5 pl-3"
+                      *ngIf="
+                        isFormGroupStepOneTouchOrDirty('phone') &&
+                        formGroupStepOne.get('phone').hasError('required')
+                      "
+                    >
+                      Teléfono es requerido
+                    </mat-error>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">add_location</i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Dirección"
+                          class="form-control"
+                          formControlName="address"
+                        />
+                      </div>
+                    </div>
+                    <mat-error
+                      class="ml-5 pl-3"
+                      *ngIf="
+                        isFormGroupStepOneTouchOrDirty('address') &&
+                        formGroupStepOne.get('address').hasError('required')
+                      "
+                    >
+                      Dirección es requerida
+                    </mat-error>
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">
+                            <i class="material-icons">place</i>
+                          </span>
+                        </div>
+                        <input
+                          type="text"
+                          placeholder="Comuna"
+                          class="form-control"
+                          formControlName="commune"
+                        />
+                      </div>
+                    </div>
+                    <mat-error
+                      class="ml-5 pl-3"
+                      *ngIf="
+                        isFormGroupStepOneTouchOrDirty('commune') &&
+                        formGroupStepOne.get('commune').hasError('required')
+                      "
+                    >
+                      Comuna es requerida
+                    </mat-error>
+                    <div class="text-center">
+                      <button
+                        mat-raised-button
+                        type="submit"
+                        class="btn btn-primary btn-round mt-4"
+                      >
+                        Continuar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div *ngIf="step === steps.step_two" class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal">
+                    <div class="icon icon-info">
+                      <i class="material-icons">insert_photo</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Logo</h4>
+                      <p class="description">
+                        Sube tu logo para visualizar en la aplicación.
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-primary">
+                      <i class="material-icons">color_lens</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Color</h4>
+                      <p class="description">
+                        Se debe seleccionar el color corporativo para visualizar
+                        la aplicación de forma personalizada
+                      </p>
+                    </div>
+                  </div>
+                  <div class="text-left mt-4 pt-4">
+                    <button mat-raised-button class="btn btn-primary btn-link" (click)="backStepOne()" >Volver</button>
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+                  <form
+                    class="form"
+                    [formGroup]="formGroupStepTwo"
+                    (ngSubmit)="onSubmitStepTwo()"
+                  >
+                    <div class="form-group has-default">
+                      <div class="input-group">
+                        <div class="col-md-3 col-sm-4">
+                          <div
+                            class="fileinput fileinput-new text-center"
+                            data-provides="fileinput"
+                          >
+                            <div class="fileinput-new thumbnail img-circle">
+                              <img
+                                src="./assets/img/placeholder.jpg"
+                                alt="..."
+                              />
+                            </div>
+                            <div
+                              class="fileinput-preview fileinput-exists thumbnail img-circle"
+                            ></div>
+                            <div>
+                              <span class="btn btn-round btn-info btn-file">
+                                <span class="fileinput-new">Agregar</span>
+                                <span class="fileinput-exists">Cambiar</span>
+                                <input
+                                  type="file"
+                                  name="..."
+                                  accept="image/*"
+                                  (change)="handleUpload($event)"
+                                />
+                              </span>
+                              <br />
+                              <a
+                                href="#pablo"
+                                class="btn btn-danger btn-round fileinput-exists"
+                                data-dismiss="fileinput"
+                                (click)="cancelUpload()"
+                                >Eliminar</a
+                              >
+                            </div>
+                          </div>
+                        </div>
+                        <mat-error
+                          class="ml-5 pl-3"
+                          *ngIf="
+                            isFormGroupStepTwoTouchOrDirty('photo') &&
+                            formGroupStepTwo.get('photo').hasError('required')
+                          "
+                        >
+                          Logo es requerido
+                        </mat-error>
+                      </div>
+                    </div>
+                    <div class="form-group has-default">
+                      <span
+                        [cpToggle]="true"
+                        [cpDialogDisplay]="'inline'"
+                        [cpCancelButton]="true"
+                        [(colorPicker)]="color"
+                      >
+                      </span>
+                    </div>
+                    <div class="text-right">
+                      <button
+                        mat-raised-button
+                        type="submit"
+                        class="btn btn-primary btn-round mt-4"
+                      >
+                        Continuar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+              <div *ngIf="step === steps.step_three" class="row">
+                <div class="col-md-5 ml-auto">
+                  <div class="info info-horizontal">
+                    <div class="icon icon-info">
+                      <i class="material-icons">timer</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Horario</h4>
+                      <p class="description">
+                        Configure el horario de atención de su clinica
+                      </p>
+                    </div>
+                  </div>
+                  <div class="info info-horizontal">
+                    <div class="icon icon-primary">
+                      <i class="material-icons">date_range</i>
+                    </div>
+                    <div class="description">
+                      <h4 class="info-title">Días</h4>
+                      <p class="description">Configure sus días de atención.</p>
+                    </div>
+                  </div>
+                  <div class="text-left mt-4">
+                    <button mat-raised-button class="btn btn-primary btn-link" (click)="backStepTwo()" >Volver</button>
+                  </div>
+                </div>
+                <div class="col-md-5 mr-auto">
+                  <form
+                    class="form"
+                    [formGroup]="formGroupStepThree"
+                    (ngSubmit)="onSubmitStepThree()"
+                  >
+                    <div class="form-group has-default" formGroupName="hours">
+                      <div class="input-group">
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <mat-select
+                              [(value)]="schedule.start"
+                              placeholder="Horario Inicio"
+                              name="Horario"
+                              formControlName="start"
+                            >
+                              <mat-option
+                                *ngFor="let hour of schedule.hours"
+                                [value]="hour"
+                              >
+                                {{ hour }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <mat-select
+                              [(value)]="schedule.end"
+                              placeholder="Horario Termino"
+                              name="Horario"
+                              formControlName="end"
+                            >
+                              <mat-option
+                                *ngFor="let hour of schedule.hours"
+                                [value]="hour"
+                              >
+                                {{ hour }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form-group has-default">
+                      <div class="input-group" formArrayName="days">
+                        <div *ngFor="let day of days.controls; index as i">
+                          <mat-checkbox
+                            class="example-margin mb-0"
+                            [formControlName]="i"
+                            >{{ schedule.days[i] }}</mat-checkbox
+                          >
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="text-left">
+                      <mat-checkbox class="form-check" formControlName="accept"
+                        >Acepto <a href="#something" target="_blank" >Terminos y condiciones</a>.
+                      </mat-checkbox>
+                    </div>
+                    <mat-error
+                          class="ml-3"
+                          *ngIf="
+                            isFormGroupStepThreeTouchOrDirty('accept') &&
+                            formGroupStepThree.get('accept').hasError('required')
+                          "
+                        >
+                          Debe aceptar Terminos y condiciones
+                    </mat-error>
+                    <div class="text-right">
+                      <button
+                        mat-raised-button
+                        type="submit"
+                        class="btn btn-primary btn-round mt-4"
+                      >
+                        Finalizar
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="copyright pull-center">
+          &copy;
+          {{ myDate | date: "yyyy" }}, made by
+          <a href="https://www.hamp.cl" target="_blank">hamp</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
